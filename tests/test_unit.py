@@ -40,10 +40,14 @@ def make_adv_volatility_payload(symbol="SPY"):
     """Realistic adv_volatility response with SVI, surface, arb, greeks, var swap."""
     return {
         "symbol": symbol,
+        "underlying_price": 580.51,
+        "as_of": "2026-03-25T15:00:00Z",
+        "market_open": True,
         "svi_parameters": [
             {
                 "expiry": "2026-04-04",
-                "dte": 9,
+                "days_to_expiry": 10,
+                "forward": 583.21,
                 "a": 0.0045,
                 "b": 0.1823,
                 "rho": -0.6214,
@@ -51,11 +55,11 @@ def make_adv_volatility_payload(symbol="SPY"):
                 "sigma": 0.0891,
                 "atm_total_variance": 0.0182,
                 "atm_iv": 18.52,
-                "forward_price": 583.21,
             },
             {
                 "expiry": "2026-04-17",
-                "dte": 22,
+                "days_to_expiry": 22,
+                "forward": 584.10,
                 "a": 0.0061,
                 "b": 0.1540,
                 "rho": -0.5890,
@@ -63,47 +67,67 @@ def make_adv_volatility_payload(symbol="SPY"):
                 "sigma": 0.1021,
                 "atm_total_variance": 0.0298,
                 "atm_iv": 19.87,
-                "forward_price": 584.10,
+            },
+        ],
+        "forward_prices": [
+            {
+                "expiry": "2026-04-04",
+                "days_to_expiry": 10,
+                "forward": 583.21,
+                "spot": 580.51,
+                "basis_pct": 0.1275,
+            },
+            {
+                "expiry": "2026-04-17",
+                "days_to_expiry": 22,
+                "forward": 584.10,
+                "spot": 580.51,
+                "basis_pct": 0.6185,
             },
         ],
         "total_variance_surface": {
             "moneyness": [-0.2, -0.1, 0.0, 0.1, 0.2],
             "expiries":  ["2026-04-04", "2026-04-17"],
-            "rows": [
+            "tenors":    [0.027397, 0.063014],
+            "total_variance": [
                 [0.0412, 0.0225, 0.0182, 0.0198, 0.0267],
                 [0.0578, 0.0341, 0.0298, 0.0312, 0.0401],
+            ],
+            "implied_vol": [
+                [24.05, 18.52, 18.52, 19.31, 21.98],
+                [25.10, 19.87, 19.87, 20.40, 22.75],
             ],
         },
         "arbitrage_flags": [],
         "greeks_surfaces": {
             "vanna": {
-                "moneyness": [-0.2, -0.1, 0.0, 0.1, 0.2],
-                "expiries":  ["2026-04-04", "2026-04-17"],
-                "rows": [
+                "strikes": [555, 565, 575, 585, 595],
+                "expiries": ["2026-04-04", "2026-04-17"],
+                "values": [
                     [-0.0412, -0.0185, 0.0000,  0.0092,  0.0201],
                     [-0.0310, -0.0140, 0.0000,  0.0071,  0.0158],
                 ],
             },
             "charm": {
-                "moneyness": [-0.2, -0.1, 0.0, 0.1, 0.2],
-                "expiries":  ["2026-04-04", "2026-04-17"],
-                "rows": [
+                "strikes": [555, 565, 575, 585, 595],
+                "expiries": ["2026-04-04", "2026-04-17"],
+                "values": [
                     [-0.0021, -0.0154, -0.0003,  0.0148,  0.0019],
                     [-0.0012, -0.0089, -0.0002,  0.0085,  0.0011],
                 ],
             },
             "volga": {
-                "moneyness": [-0.2, -0.1, 0.0, 0.1, 0.2],
-                "expiries":  ["2026-04-04", "2026-04-17"],
-                "rows": [
+                "strikes": [555, 565, 575, 585, 595],
+                "expiries": ["2026-04-04", "2026-04-17"],
+                "values": [
                     [0.0812, 0.0341, 0.0010, 0.0298, 0.0701],
                     [0.0650, 0.0280, 0.0008, 0.0245, 0.0580],
                 ],
             },
             "speed": {
-                "moneyness": [-0.2, -0.1, 0.0, 0.1, 0.2],
-                "expiries":  ["2026-04-04", "2026-04-17"],
-                "rows": [
+                "strikes": [555, 565, 575, 585, 595],
+                "expiries": ["2026-04-04", "2026-04-17"],
+                "values": [
                     [0.0003, 0.0018, 0.0000, -0.0017, -0.0003],
                     [0.0002, 0.0012, 0.0000, -0.0011, -0.0002],
                 ],
@@ -112,16 +136,18 @@ def make_adv_volatility_payload(symbol="SPY"):
         "variance_swap_fair_values": [
             {
                 "expiry": "2026-04-04",
-                "dte": 9,
+                "days_to_expiry": 10,
                 "fair_variance": 0.0197,
                 "fair_vol": 19.85,
+                "atm_iv": 18.52,
                 "convexity_adjustment": 1.33,
             },
             {
                 "expiry": "2026-04-17",
-                "dte": 22,
+                "days_to_expiry": 22,
                 "fair_variance": 0.0318,
                 "fair_vol": 21.02,
+                "atm_iv": 19.87,
                 "convexity_adjustment": 1.15,
             },
         ],
@@ -132,9 +158,10 @@ def make_volatility_payload(symbol="SPY"):
     """Realistic volatility response with RV, skew, term structure, VRP."""
     return {
         "symbol": symbol,
+        "underlying_price": 580.51,
+        "as_of": "2026-03-25T15:00:00Z",
+        "market_open": True,
         "atm_iv": 19.2,
-        "iv_rank": 42.0,
-        "iv_percentile": 38.0,
         "realized_vol": {
             "rv_5d":  14.8,
             "rv_10d": 16.3,
@@ -143,46 +170,46 @@ def make_volatility_payload(symbol="SPY"):
             "rv_60d": 18.5,
         },
         "iv_rv_spreads": {
-            "spread_5d":  4.4,
-            "spread_10d": 2.9,
-            "spread_20d": 3.3,
-            "spread_30d": 2.1,
-            "spread_60d": 0.7,
-            "assessment": "Options are moderately rich; mild seller edge on 5d-20d windows.",
+            "vrp_5d":  4.4,
+            "vrp_10d": 2.9,
+            "vrp_20d": 3.3,
+            "vrp_30d": 2.1,
+            "assessment": "moderate_premium",
         },
         "skew_profiles": [
             {
                 "expiry": "2026-04-04",
-                "dte": 9,
+                "days_to_expiry": 9,
                 "atm_iv": 19.2,
                 "put_10d_iv": 28.1,
                 "put_25d_iv": 22.4,
                 "call_25d_iv": 16.9,
                 "call_10d_iv": 14.2,
-                "risk_reversal_25d": -5.5,
-                "butterfly_25d": 1.3,
+                "skew_25d": -5.5,
                 "smile_ratio": 1.46,
                 "tail_convexity": 5.7,
             },
             {
                 "expiry": "2026-04-17",
-                "dte": 22,
+                "days_to_expiry": 22,
                 "atm_iv": 20.1,
                 "put_10d_iv": 27.3,
                 "put_25d_iv": 23.2,
                 "call_25d_iv": 17.8,
                 "call_10d_iv": 15.1,
-                "risk_reversal_25d": -5.4,
-                "butterfly_25d": 1.5,
+                "skew_25d": -5.4,
                 "smile_ratio": 1.36,
                 "tail_convexity": 4.1,
             },
         ],
         "term_structure": {
-            "shape": "contango",
-            "near_slope": 0.82,
-            "far_slope": 0.31,
-            "iv_dispersion": 1.8,
+            "state": "contango",
+            "near_slope_pct": 0.82,
+            "far_slope_pct": 0.31,
+        },
+        "iv_dispersion": {
+            "cross_expiry": 1.8,
+            "cross_strike": 12.80,
         },
     }
 
@@ -212,7 +239,8 @@ def test_adv_volatility_svi_parameters(fa):
     assert row["m"] == -0.0312
     assert row["sigma"] == 0.0891
     assert row["atm_iv"] == 18.52
-    assert row["forward_price"] == 583.21
+    assert row["forward"] == 583.21
+    assert row["days_to_expiry"] == 10
 
 
 # ---------------------------------------------------------------------------
@@ -230,13 +258,16 @@ def test_adv_volatility_total_variance_surface(fa):
 
     assert "moneyness" in surface
     assert "expiries" in surface
-    assert "rows" in surface
+    assert "tenors" in surface
+    assert "total_variance" in surface
+    assert "implied_vol" in surface
     assert len(surface["moneyness"]) == 5
     assert len(surface["expiries"]) == 2
-    assert len(surface["rows"]) == 2
+    assert len(surface["total_variance"]) == 2
+    assert len(surface["implied_vol"]) == 2
     # ATM (k=0) total variance for first expiry
     atm_idx = surface["moneyness"].index(0.0)
-    assert surface["rows"][0][atm_idx] == 0.0182
+    assert surface["total_variance"][0][atm_idx] == 0.0182
 
 
 # ---------------------------------------------------------------------------
@@ -267,17 +298,14 @@ def test_adv_volatility_arbitrage_flags_violations(fa):
         {
             "type": "butterfly",
             "expiry": "2026-04-04",
-            "moneyness": -0.15,
-            "d2w_dk2": -0.0012,
-            "severity": "minor",
+            "strike_or_k": -0.15,
+            "description": "Negative butterfly at k=-0.150: d²w/dk²=-0.0012",
         },
         {
             "type": "calendar",
-            "near_expiry": "2026-04-04",
-            "far_expiry": "2026-04-17",
-            "moneyness": 0.10,
-            "near_variance": 0.0210,
-            "far_variance": 0.0205,
+            "expiry": "2026-04-04",
+            "strike_or_k": 0.10,
+            "description": "Calendar arbitrage between 2026-04-04 and 2026-04-17 at k=0.100",
         },
     ]
     responses.get(f"{BASE}/v1/adv_volatility/SPY", json=payload)
@@ -291,11 +319,12 @@ def test_adv_volatility_arbitrage_flags_violations(fa):
 
     assert len(butterfly) == 1
     assert butterfly[0]["expiry"] == "2026-04-04"
-    assert butterfly[0]["d2w_dk2"] == -0.0012
+    assert butterfly[0]["strike_or_k"] == -0.15
+    assert "description" in butterfly[0]
 
     assert len(calendar) == 1
-    assert calendar[0]["near_expiry"] == "2026-04-04"
-    assert calendar[0]["far_expiry"]  == "2026-04-17"
+    assert calendar[0]["expiry"] == "2026-04-04"
+    assert "description" in calendar[0]
 
 
 # ---------------------------------------------------------------------------
@@ -313,14 +342,14 @@ def test_adv_volatility_greeks_surfaces(fa):
 
     for greek in ["vanna", "charm", "volga", "speed"]:
         assert greek in gs
-        assert "moneyness" in gs[greek]
+        assert "strikes" in gs[greek]
         assert "expiries" in gs[greek]
-        assert "rows" in gs[greek]
+        assert "values" in gs[greek]
 
-    # Vanna at ATM (k=0.0) should be zero by symmetry
+    # Vanna at ATM strike (index 2, value 575) should be zero by symmetry
     vanna = gs["vanna"]
-    atm_idx = vanna["moneyness"].index(0.0)
-    assert vanna["rows"][0][atm_idx] == 0.0
+    atm_idx = 2  # index of strike 575 (ATM-nearest) in [555, 565, 575, 585, 595]
+    assert vanna["values"][0][atm_idx] == 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -341,13 +370,14 @@ def test_adv_volatility_variance_swap_fair_values(fa):
 
     vs = var_swaps[0]
     assert vs["expiry"] == "2026-04-04"
+    assert vs["days_to_expiry"] == 10
     assert vs["fair_variance"] == 0.0197
     assert vs["fair_vol"] == 19.85
+    assert vs["atm_iv"] == 18.52
     assert vs["convexity_adjustment"] == 1.33
 
     # Fair vol must exceed ATM IV (convexity adjustment is positive)
-    svi_atm_iv = payload["svi_parameters"][0]["atm_iv"]
-    assert vs["fair_vol"] > svi_atm_iv
+    assert vs["fair_vol"] > vs["atm_iv"]
 
 
 # ---------------------------------------------------------------------------
@@ -376,7 +406,7 @@ def test_volatility_realized_vol(fa):
 
 @responses.activate
 def test_volatility_skew_profiles(fa):
-    """Skew profile fields (RR, BF, smile ratio, tail convexity) are parsed."""
+    """Skew profile fields (skew_25d, smile ratio, tail convexity) are parsed."""
     payload = make_volatility_payload()
     responses.get(f"{BASE}/v1/volatility/SPY", json=payload)
 
@@ -388,9 +418,10 @@ def test_volatility_skew_profiles(fa):
 
     s = skew[0]
     assert s["expiry"] == "2026-04-04"
-    assert s["risk_reversal_25d"] == -5.5
-    assert s["butterfly_25d"] == 1.3
+    assert s["days_to_expiry"] == 9
+    assert s["skew_25d"] == -5.5
     assert s["smile_ratio"] == 1.46
+    assert s["tail_convexity"] == 5.7
     # Put 10d IV should exceed ATM IV
     assert s["put_10d_iv"] > s["atm_iv"]
 
@@ -401,17 +432,20 @@ def test_volatility_skew_profiles(fa):
 
 @responses.activate
 def test_volatility_term_structure(fa):
-    """Term structure shape, slopes, and dispersion are parsed."""
+    """Term structure state, slopes, and iv_dispersion are parsed."""
     payload = make_volatility_payload()
     responses.get(f"{BASE}/v1/volatility/SPY", json=payload)
 
     result = fa.volatility("SPY")
     ts = result["term_structure"]
 
-    assert ts["shape"] == "contango"
-    assert ts["near_slope"] == 0.82
-    assert ts["far_slope"] == 0.31
-    assert ts["iv_dispersion"] == 1.8
+    assert ts["state"] == "contango"
+    assert ts["near_slope_pct"] == 0.82
+    assert ts["far_slope_pct"] == 0.31
+
+    # iv_dispersion is a separate top-level section
+    iv_disp = result["iv_dispersion"]
+    assert iv_disp["cross_expiry"] == 1.8
 
 
 # ---------------------------------------------------------------------------
@@ -420,34 +454,35 @@ def test_volatility_term_structure(fa):
 
 @responses.activate
 def test_volatility_iv_rv_spreads(fa):
-    """IV-RV spread values and assessment are correctly parsed."""
+    """IV-RV spread values (vrp_*d) and assessment are correctly parsed."""
     payload = make_volatility_payload()
     responses.get(f"{BASE}/v1/volatility/SPY", json=payload)
 
     result = fa.volatility("SPY")
     spreads = result["iv_rv_spreads"]
 
-    assert spreads["spread_5d"]  == 4.4
-    assert spreads["spread_20d"] == 3.3
-    assert spreads["spread_60d"] == 0.7
+    assert spreads["vrp_5d"]  == 4.4
+    assert spreads["vrp_20d"] == 3.3
     assert "assessment" in spreads
     assert len(spreads["assessment"]) > 0
 
 
 # ---------------------------------------------------------------------------
-# 11. volatility — IV rank and percentile
+# 11. volatility — top-level fields present (no iv_rank / iv_percentile)
 # ---------------------------------------------------------------------------
 
 @responses.activate
-def test_volatility_iv_rank_and_percentile(fa):
-    """IV rank (0-100) and IV percentile fields are parsed."""
+def test_volatility_top_level_fields(fa):
+    """Top-level fields atm_iv, symbol, realized_vol, iv_rv_spreads are present."""
     payload = make_volatility_payload()
     responses.get(f"{BASE}/v1/volatility/SPY", json=payload)
 
     result = fa.volatility("SPY")
-    assert result["iv_rank"] == 42.0
-    assert result["iv_percentile"] == 38.0
-    assert 0 <= result["iv_rank"] <= 100
+    assert result["symbol"] == "SPY"
+    assert result["atm_iv"] == 19.2
+    assert 0 < result["atm_iv"] < 200
+    assert "realized_vol" in result
+    assert "iv_rv_spreads" in result
 
 
 # ---------------------------------------------------------------------------
@@ -595,7 +630,7 @@ def test_429_rate_limit(fa):
 
 
 # ---------------------------------------------------------------------------
-# 18. multiple symbols scanning (IV rank scanner pattern)
+# 18. multiple symbols scanning (ATM IV scanner pattern)
 # ---------------------------------------------------------------------------
 
 @responses.activate
@@ -652,17 +687,26 @@ def test_multi_symbol_scan_with_tier_error(fa):
 
 
 # ---------------------------------------------------------------------------
-# 20. adv_volatility — forward price basis check
+# 20. adv_volatility — forward prices section
 # ---------------------------------------------------------------------------
 
 @responses.activate
 def test_adv_volatility_forward_prices(fa):
-    """Forward prices are present and plausible (> 0) for each expiry."""
+    """Forward prices section is present and plausible (> 0) for each expiry."""
     payload = make_adv_volatility_payload()
     responses.get(f"{BASE}/v1/adv_volatility/SPY", json=payload)
 
     result = fa.adv_volatility("SPY")
+
+    # forward is in svi_parameters
     for row in result["svi_parameters"]:
-        assert row["forward_price"] > 0
+        assert row["forward"] > 0
         # Forward should be close to spot (within 5%)
-        assert 500 < row["forward_price"] < 700
+        assert 500 < row["forward"] < 700
+
+    # forward_prices is a dedicated section
+    assert "forward_prices" in result
+    for fp in result["forward_prices"]:
+        assert fp["forward"] > 0
+        assert fp["spot"] > 0
+        assert 500 < fp["forward"] < 700

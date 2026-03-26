@@ -114,7 +114,7 @@ def test_adv_volatility_svi_parameters(fa):
     assert -1 < row["rho"] < 1
     assert row["sigma"] > 0
     assert row["atm_iv"] > 0
-    assert row["forward_price"] > 0
+    assert row["forward"] > 0
 
 
 # ---------------------------------------------------------------------------
@@ -255,7 +255,7 @@ def test_volatility_tsla(fa):
 # ---------------------------------------------------------------------------
 
 def test_adv_volatility_total_variance_surface(fa):
-    """adv_volatility returns a total_variance_surface with rows and moneyness."""
+    """adv_volatility returns a total_variance_surface with total_variance and moneyness."""
     try:
         result = fa.adv_volatility("SPY")
     except TierRestrictedError:
@@ -266,13 +266,13 @@ def test_adv_volatility_total_variance_surface(fa):
 
     assert "moneyness" in surface
     assert "expiries" in surface
-    assert "rows" in surface
+    assert "total_variance" in surface
     assert len(surface["moneyness"]) > 0
     assert len(surface["expiries"]) > 0
-    assert len(surface["rows"]) == len(surface["expiries"])
+    assert len(surface["total_variance"]) == len(surface["expiries"])
 
     # All total variance values should be non-negative
-    for row in surface["rows"]:
+    for row in surface["total_variance"]:
         for val in row:
             if val is not None:
                 assert val >= 0, f"Negative total variance found: {val}"
