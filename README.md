@@ -1,5 +1,6 @@
 # Volatility Surface Python
 
+[![CI](https://github.com/FlashAlpha-lab/volatility-surface-python/actions/workflows/ci.yml/badge.svg)](https://github.com/FlashAlpha-lab/volatility-surface-python/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/pypi/pyversions/flashalpha)](https://pypi.org/project/flashalpha/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -226,6 +227,14 @@ Get your API key at [flashalpha.com](https://flashalpha.com).
 - [FlashAlpha](https://flashalpha.com) — API keys, docs, pricing
 - [FlashAlpha Python SDK](https://github.com/FlashAlpha-lab/flashalpha-python)
 - [API Documentation](https://flashalpha.com/docs)
+
+## Related Repositories
+
+- [FlashAlpha Python SDK](https://github.com/FlashAlpha-lab/flashalpha-python) — `pip install flashalpha`
+- [GEX Explained](https://github.com/FlashAlpha-lab/gex-explained) — gamma exposure theory and code
+- [0DTE Options Analytics](https://github.com/FlashAlpha-lab/0dte-options-analytics) — 0DTE pin risk, expected move, dealer hedging
+- [Examples](https://github.com/FlashAlpha-lab/flashalpha-examples) — more tutorials
+- [Awesome Options Analytics](https://github.com/FlashAlpha-lab/awesome-options-analytics) — curated resource list
 
 ## License
 
