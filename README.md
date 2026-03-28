@@ -196,8 +196,8 @@ print(f"Assessment: {vol['iv_rv_spreads']['assessment']}")
 
 | Plan | Requests/Day | Key Features |
 |------|-------------|--------------|
-| Free | 10 | Stock quotes, GEX/DEX/VEX/CHEX, BSM greeks, IV solver, vol surface |
-| Basic | 250 | Free + index symbols (SPX, VIX, RUT) |
+| Free | 5 | Stock quotes, GEX/DEX/VEX/CHEX, BSM greeks, IV solver, vol surface |
+| Basic | 100 | Free + index symbols (SPX, VIX, RUT) |
 | Growth | 2,500 | + Volatility analytics, exposure summary, 0DTE, Kelly sizing |
 | Alpha | Unlimited | + Advanced volatility: SVI, variance surface, arbitrage detection, greeks surfaces, variance swaps |
 
