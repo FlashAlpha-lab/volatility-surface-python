@@ -142,6 +142,36 @@ Learn more: [Realized vs Implied Volatility and the Risk Premium](https://flasha
 
 ---
 
+## Live Volatility Surface Endpoints (FlashAlpha API)
+
+The math in this repo is computed from scratch, but you don't have to fit the surface yourself. FlashAlpha exposes a full set of implied volatility surface, SVI calibration, volatility skew, term structure, and dispersion endpoints that return arbitrage-checked, production-grade analytics directly. Browse the full reference at [API Documentation](https://flashalpha.com/docs) and route to the [Alpha tier for quant teams](https://flashalpha.com/for-quant-teams?utm_source=github&utm_medium=readme&utm_campaign=repo-volatility-surface-python).
+
+**Surface construction and SVI calibration**
+
+- **`GET /v1/surface/svi/{symbol}`** — Live SVI-fitted implied volatility surface returning the raw five SVI parameters (a, b, rho, m, sigma) per expiry, plus ATM total variance and ATM implied volatility. The fastest path to a calibrated, arbitrage-free smile per maturity. (Alpha+)
+- **`GET /v1/adv_volatility/{symbol}`** — The full advanced volatility payload: SVI parameters, the total-variance surface grid across log-moneyness and expiry, butterfly and calendar arbitrage detection flags, greeks surfaces (vanna, charm, volga), and variance-swap fair values. One call for the entire arbitrage-free variance surface. (Alpha+)
+
+**Volatility skew, term structure, and tails**
+
+- **`GET /v1/volatility/skew-term/{symbol}`** — Volatility skew term structure with 25-delta and 10-delta wings, risk reversal, butterfly, and tail convexity computed per expiry. Quantifies put skew and smile curvature across the whole term structure. (Growth+)
+- **`GET /v1/volatility/spot-vol-correlation/{symbol}`** — 20-day and 60-day spot-vol correlation, measuring the leverage effect that drives the slope of the implied volatility skew. (Growth+)
+- **`GET /v1/expected-move/{symbol}`** — Straddle-implied expected move per expiry, the ATM-straddle-derived one-standard-deviation range priced into the surface for each maturity. (Basic+)
+
+**Cross-asset dispersion**
+
+- **`GET /v1/dispersion`** — Implied vs realized correlation across an index basket: compares index implied volatility to the volatility of its constituents to surface dispersion and correlation-trading opportunities. (Alpha+)
+
+**Surface-driven strategy signals**
+
+- **`GET /v1/strategies/surface-anomaly/{symbol}`** — SVI-residual rich/cheap wing detection, flagging strikes that trade away from the fitted arbitrage-free surface. (Alpha+)
+- **`GET /v1/strategies/skew/{symbol}`** — Volatility skew signal derived from risk reversal and butterfly richness versus history. (Growth+)
+- **`GET /v1/strategies/term-structure/{symbol}`** — Term structure signal flagging contango/backwardation extremes and calendar opportunities. (Growth+)
+- **`GET /v1/strategies/tail-pricing/{symbol}`** — Tail pricing signal measuring how richly the surface prices extreme OTM put tail convexity. (Growth+)
+
+Each strategy endpoint returns a uniform decision envelope (direction, conviction, and supporting metrics) so SVI-residual, skew, term-structure, and tail-pricing signals compose cleanly into a single volatility-arbitrage workflow.
+
+---
+
 ## Quick Start
 
 ```python
