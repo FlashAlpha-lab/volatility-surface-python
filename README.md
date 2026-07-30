@@ -240,7 +240,7 @@ Use the `=F` suffix — bare `ES`/`NQ` are equities, not futures. In raw REST pa
 | Plan | Requests/Day | Key Features |
 |------|-------------|--------------|
 | Free | 5 | Stock quotes, single-expiry GEX (equities), BSM greeks, IV solver, vol surface |
-| Basic | 100 | + DEX/VEX/CHEX, max pain, ETF/index symbols (SPX, VIX, RUT) |
+| Basic | 250 | + DEX/VEX/CHEX, max pain, ETF/index symbols (SPX, VIX, RUT) |
 | Growth | 2,500 | + Volatility analytics, exposure summary, 0DTE, Kelly sizing |
 | Alpha | Unlimited | + Advanced volatility: SVI, variance surface, arbitrage detection, greeks surfaces, variance swaps |
 
