@@ -300,6 +300,7 @@ Get your API key at [flashalpha.com](https://flashalpha.com).
 - [Advanced Volatility API: SVI, Variance Surface, Arbitrage Detection](https://flashalpha.com/articles/advanced-volatility-api-svi-variance-surface-arbitrage-detection)
 - [Realized vs Implied Volatility and the Risk Premium](https://flashalpha.com/articles/realized-vs-implied-volatility-risk-premium)
 - [Volatility Term Structure: Contango, Backwardation, and Events](https://flashalpha.com/articles/volatility-term-structure-contango-backwardation-events)
+- [sell-window: should you sell options today?](https://flashalpha.com/articles/complete-guide-trading-sell-window-spy-qqq-iwm?utm_source=github&utm_medium=readme&utm_campaign=repo-volatility-surface-python&utm_content=sell-window) A sell or skip answer per expiry for SPY, QQQ and IWM, with the strikes, quotes and exit rule on a sell. [Every backtested trade](https://flashalpha.com/articles/sell-window-backtest-every-trade-2018-2026?utm_source=github&utm_medium=readme&utm_campaign=repo-volatility-surface-python&utm_content=sell-window).
 
 ---
 
