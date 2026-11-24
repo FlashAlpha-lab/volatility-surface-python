@@ -314,6 +314,7 @@ Get your API key at [flashalpha.com](https://flashalpha.com).
 
 - [FlashAlpha Python SDK](https://github.com/FlashAlpha-lab/flashalpha-python) — `pip install flashalpha`
 - [GEX Explained](https://github.com/FlashAlpha-lab/gex-explained) — gamma exposure theory and code
+- [TradingView GEX by FlashAlpha](https://github.com/FlashAlpha-lab/tradingview-gex-flashalpha) - call wall, put wall, gamma flip and max pain on a live candlestick chart
 - [0DTE Options Analytics](https://github.com/FlashAlpha-lab/0dte-options-analytics) — 0DTE pin risk, expected move, dealer hedging
 - [Examples](https://github.com/FlashAlpha-lab/flashalpha-examples) — more tutorials
 - [Awesome Options Analytics](https://github.com/FlashAlpha-lab/awesome-options-analytics) — curated resource list
